@@ -4,7 +4,7 @@ from esphome.const import *
 from esphome.components import uart
 
 DEPENDENCIES = ["uart"]
-CODEOWNERS = ["@bernikr"]
+CODEOWNERS = ["@bernikr", "@rippinsail"]
 AUTO_LOAD = ["text_sensor", "sensor"]
 MULTI_CONF = True
 
