@@ -90,7 +90,7 @@ namespace esphome {
             ESP_LOGV(TAG, "Checking decrypted message byte msglen-30: %02x", message[msglen-5*6]);
             ESP_LOGV(TAG, "Checking decrypted message byte msglen-35: %02x", message[msglen-5*7]);
             ESP_LOGV(TAG, "Checking decrypted message byte msglen-40: %02x", message[msglen-5*8]);
-
+            /*
             if(message[0] != 0x0f || message[msglen-5] != 0x06 || message[msglen-5*2] != 0x06
                 || message[msglen-5*3] != 0x06 || message[msglen-5*4] != 0x06
                 || message[msglen-5*5] != 0x06 || message[msglen-5*6] != 0x06
@@ -98,6 +98,7 @@ namespace esphome {
                 ESP_LOGW(TAG, "decryption error, please check if your key is correct");
                 return;
             }
+            */
 
             uint32_t active_energy_pos_raw    = bytes_to_int(message, msglen-4-5*7, 4);
             uint32_t active_energy_neg_raw    = bytes_to_int(message, msglen-4-5*6, 4);
