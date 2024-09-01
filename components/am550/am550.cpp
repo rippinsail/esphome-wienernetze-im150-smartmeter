@@ -55,10 +55,8 @@ namespace esphome {
             memcpy(actual_content, &msg[16], 5);
             ESP_LOGW(TAG, "Actual content at msg[16]: %s", actual_content);
 
-            if(memcmp(&msg[16], "SMSfp", 5)!=0){
+            if(memcmp(&msg[16], "Khu6\x86", 5)!=0){
                 ESP_LOGW(TAG, "Unknown smartmeter model, support is untested.");
-                ESP_LOGW(TAG, "Please open a GitHub issue:");
-                ESP_LOGW(TAG, "https://github.com/bernikr/esphome-wienernetze-am550-smartmeter/issues/new");
             }
 
             // CRC Check
