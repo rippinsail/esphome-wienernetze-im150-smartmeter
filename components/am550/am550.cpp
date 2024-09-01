@@ -50,6 +50,11 @@ namespace esphome {
                 return;
             }
 
+            // Print the actual content starting at msg[16]
+            char actual_content[6] = {0};  // Buffer for the 5 bytes + null terminator
+            memcpy(actual_content, &msg[16], 5);
+            ESP_LOGW(TAG, "Actual content at msg[16]: %s", actual_content);
+
             if(memcmp(&msg[16], "SMSfp", 5)!=0){
                 ESP_LOGW(TAG, "Unknown smartmeter model, support is untested.");
                 ESP_LOGW(TAG, "Please open a GitHub issue:");
