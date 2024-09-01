@@ -80,6 +80,17 @@ namespace esphome {
             this->ctraes128.decrypt(message, message, msglen);
             ESP_LOGV(TAG, "decrypted data: %s", format_hex_pretty(std::vector<uint8_t>(message, message+msglen)).c_str());
 
+            // Debug
+            ESP_LOGV(TAG, "Checking decrypted message byte 0: %02x", message[0]);
+            ESP_LOGV(TAG, "Checking decrypted message byte msglen-5: %02x", message[msglen-5]);
+            ESP_LOGV(TAG, "Checking decrypted message byte msglen-10: %02x", message[msglen-5*2]);
+            ESP_LOGV(TAG, "Checking decrypted message byte msglen-15: %02x", message[msglen-5*3]);
+            ESP_LOGV(TAG, "Checking decrypted message byte msglen-20: %02x", message[msglen-5*4]);
+            ESP_LOGV(TAG, "Checking decrypted message byte msglen-25: %02x", message[msglen-5*5]);
+            ESP_LOGV(TAG, "Checking decrypted message byte msglen-30: %02x", message[msglen-5*6]);
+            ESP_LOGV(TAG, "Checking decrypted message byte msglen-35: %02x", message[msglen-5*7]);
+            ESP_LOGV(TAG, "Checking decrypted message byte msglen-40: %02x", message[msglen-5*8]);
+
             if(message[0] != 0x0f || message[msglen-5] != 0x06 || message[msglen-5*2] != 0x06
                 || message[msglen-5*3] != 0x06 || message[msglen-5*4] != 0x06
                 || message[msglen-5*5] != 0x06 || message[msglen-5*6] != 0x06
