@@ -90,7 +90,7 @@ namespace esphome {
             ESP_LOGV(TAG, "decrypted data: %s", format_hex_pretty(std::vector<uint8_t>(message, message+msglen)).c_str());
 
             // Decrypt new
-            std::vector<uint8_t> encryptedData(input.begin() + 28 + add, input.end() - 3);
+            // std::vector<uint8_t> encryptedData(input.begin() + 28 + add, input.end() - 3);
 
 
 
