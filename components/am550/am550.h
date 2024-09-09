@@ -55,7 +55,7 @@ namespace esphome {
 
                 const uint8_t *key; // Stores the decryption key
 
-                std::vector<uint8_t> hexToBytes(const std::string &hex)
+                std::vector<uint8_t> hexToBytes(const std::string &hex);
                 int bytes_to_int(uint8_t bytes[], int left, int right);
                 void handle_message(std::vector<uint8_t> msg);
         };
