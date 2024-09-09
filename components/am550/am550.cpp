@@ -68,7 +68,7 @@ namespace esphome {
             }
             
             // Decrypt
-            ESP_LOGV(TAG, "start decrypting using key: %s", key);
+            ESP_LOGV(TAG, "start decrypting using key: %02x", this->key);
             uint8_t msglen = datalen - 33;
             uint8_t message[msglen] = {0};
             memcpy(message, msg.data() + 30, msglen);
