@@ -24,7 +24,7 @@ namespace esphome {
                 // use static string for debugging:
                 std::string hexInput = "7EA067CF022313FBF1E6E700DB0849534B687536864B4F20027E187993D225CDA195A03AFAC7567FE724D8CD4C7DC9180B679B1BAD7AF68520C68932CAC7817A6A5CB3FAFCC0CF07631F657A9105F35626C197A6CEAD17C6967866EC1434044D66EF056BE33DF1727E";  // Replace with actual hex string
                 std::vector<uint8_t> staticBytes = hexToBytes(hexInput);
-                ESP_LOGV(TAG, "static data: %s", format_hex_pretty(std::vector<uint8_t>(staticBytes, staticBytes+msglen)).c_str());
+                ESP_LOGV(TAG, "static data: %s", format_hex_pretty(staticBytes.c_str()));
 
                 this->receiveBuffer.clear(); // Reset buffer
             }
@@ -103,7 +103,7 @@ namespace esphome {
             this->ctraes128.setIV(nonce, 16);
             ESP_LOGV(TAG, "encrypted data: %s", format_hex_pretty(std::vector<uint8_t>(message, message+msglen)).c_str());            
             this->ctraes128.decrypt(message, message, msglen);
-            ESP_LOGV(TAG, "nonce: %s", format_hex_pretty(std::vector<uint8_t>(nonce, nonce+msglen)).c_str());
+            ESP_LOGV(TAG, "nonce: %s", format_hex_pretty(nonce.c_str()));
             ESP_LOGV(TAG, "decrypted data: %s", format_hex_pretty(std::vector<uint8_t>(message, message+msglen)).c_str());
 
             // Decrypt new
