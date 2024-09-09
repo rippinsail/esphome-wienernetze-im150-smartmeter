@@ -19,9 +19,28 @@ namespace esphome {
             
             if(!this->receiveBuffer.empty() && currentTime - this->lastRead > this->readTimeout){
                 ESP_LOGV(TAG, "raw recieved data: %s", format_hex_pretty(this->receiveBuffer).c_str());
-                handle_message(this->receiveBuffer);
+                
+                // handle_message(this->receiveBuffer);
+                // use static string for debugging:
+                std::string hexInput = "7EA067CF022313FBF1E6E700DB0849534B687536864B4F20027E187993D225CDA195A03AFAC7567FE724D8CD4C7DC9180B679B1BAD7AF68520C68932CAC7817A6A5CB3FAFCC0CF07631F657A9105F35626C197A6CEAD17C6967866EC1434044D66EF056BE33DF1727E";  // Replace with actual hex string
+                handle_message(hexToBytes(hexInput));
+
                 this->receiveBuffer.clear(); // Reset buffer
             }
+        }
+
+        // Function to convert hexadecimal string to byte array
+        std::vector<uint8_t> hexToBytes(const std::string &hex) {
+            std::vector<uint8_t> bytes;
+            if (hex.length() % 2 != 0) {
+                throw std::invalid_argument("Hex string has an invalid length.");
+            }
+            for (size_t i = 0; i < hex.length(); i += 2) {
+                std::string byteString = hex.substr(i, 2);
+                uint8_t byte = static_cast<uint8_t>(std::stoi(byteString, nullptr, 16));
+                bytes.push_back(byte);
+            }
+            return bytes;
         }
 
         int AM550::bytes_to_int(uint8_t bytes[], int left, int len) {
