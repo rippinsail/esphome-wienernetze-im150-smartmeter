@@ -103,7 +103,7 @@ namespace esphome {
             this->ctraes128.setIV(nonce, 16);
             ESP_LOGV(TAG, "encrypted data: %s", format_hex_pretty(std::vector<uint8_t>(message, message+msglen)).c_str());            
             this->ctraes128.decrypt(message, message, msglen);
-            ESP_LOGV(TAG, "nonce: %s", format_hex_pretty(nonce.c_str()));
+            ESP_LOGV(TAG, "nonce: %s", format_hex_pretty(std::vector<uint8_t>(nonce, nonce+msglen)).c_str());
             ESP_LOGV(TAG, "decrypted data: %s", format_hex_pretty(std::vector<uint8_t>(message, message+msglen)).c_str());
 
             // Decrypt new
