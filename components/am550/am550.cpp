@@ -66,13 +66,15 @@ namespace esphome {
                 ESP_LOGW(TAG, "crc mismatch: calculated %04x, expected %04x", crc, expected_crc);
                 return;
             }
-            
-            // Decrypt
+
+            /*            
             ESP_LOGV(TAG, "start decrypting using key:");
             for (int i = 0; i < 16; ++i) {
                 ESP_LOGV(TAG, "%02X.", this->key[i]);  // Print each byte in uppercase hexadecimal with a dot separator
             }
+            */
 
+            // Decrypt old
             uint8_t msglen = datalen - 33;
             uint8_t message[msglen] = {0};
             memcpy(message, msg.data() + 30, msglen);
@@ -82,8 +84,15 @@ namespace esphome {
             nonce[15] = 0x02;
             this->ctraes128.setKey(this->key, 16);
             this->ctraes128.setIV(nonce, 16);
+            ESP_LOGV(TAG, "encrypted data: %s", format_hex_pretty(std::vector<uint8_t>(message, message+msglen)).c_str());            
             this->ctraes128.decrypt(message, message, msglen);
+            ESP_LOGV(TAG, "nonce: %s", format_hex_pretty(std::vector<uint8_t>(nonce, nonce+msglen)).c_str());
             ESP_LOGV(TAG, "decrypted data: %s", format_hex_pretty(std::vector<uint8_t>(message, message+msglen)).c_str());
+
+            // Decrypt new
+            std::vector<uint8_t> encryptedData(input.begin() + 28 + add, input.end() - 3);
+
+
 
             // Debug
             ESP_LOGV(TAG, "Checking decrypted message byte 0: %02x", message[0]);
