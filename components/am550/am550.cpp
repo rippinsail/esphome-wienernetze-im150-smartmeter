@@ -30,7 +30,7 @@ namespace esphome {
         }
 
         // Function to convert hexadecimal string to byte array
-        std::vector<uint8_t> hexToBytes(const std::string &hex) {
+        std::vector<uint8_t> AM550::hexToBytes(const std::string &hex) {
             std::vector<uint8_t> bytes;
             /*for (size_t i = 0; i < hex.length(); i += 2) {
                 std::string byteString = hex.substr(i, 2);
